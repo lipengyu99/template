@@ -11,6 +11,7 @@ import '@/styles/index.scss' // global css
 import App from './App'
 import store from './store'
 import router from './router'
+import http from './http'
 
 import '@/icons' // icon
 import '@/permission' // permission control
@@ -22,11 +23,14 @@ import '@/permission' // permission control
  *
  * Currently MockJs will be used in the production environment,
  * please remove it before going online ! ! !
+ * 
  */
+
 if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
 }
+Vue.prototype.$http = http
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
@@ -34,6 +38,8 @@ Vue.use(ElementUI, { locale })
 // Vue.use(ElementUI)
 
 Vue.config.productionTip = false
+
+
 
 new Vue({
   el: '#app',
