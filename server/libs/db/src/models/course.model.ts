@@ -10,7 +10,7 @@ export class Course {
 
     @ApiProperty({ description:'重要性'})
    @prop()
-   Imp:string
+   Imp:number
     @ApiProperty({ description:'类型'})
    @prop()
    type:string
