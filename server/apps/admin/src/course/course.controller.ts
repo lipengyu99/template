@@ -47,6 +47,7 @@ export class CourseController {
                 },
                 {
                     id: "5",
+                   
                     label: "类型",
                     sortable: true,
                     width: "150px",
