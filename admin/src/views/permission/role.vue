@@ -1,6 +1,6 @@
 <template>
-<div class="filecontainer">
-    <avue-crud :data="data" :option="option" 
+<div class="file">
+       <avue-crud :data="data" :option="option" 
     v-model="obj" 
     :page='page'
     @on-load="onLoad"
@@ -10,17 +10,16 @@
     @row-update="rowUpdate" 
     @row-del="rowDel" 
     @search-change="searchChange">
-    
     <template slot-scope="scope" slot="menu">
-        <el-button v-if="scope.row.status!='drft'" type="info" size="small" @click="tip(scope.row,'drft')" icon="el-icon-close">drft</el-button>
-        <el-button v-if="scope.row.status!='published'" type="success" size="small" @click="tip(scope.row,'published')" icon="el-icon-check">publish</el-button>
+        <el-button v-if="scope.row.status!='ban'" type="danger" size="small" @click="tip(scope.row,'ban')" icon="el-icon-close">禁用</el-button>
+        <el-button v-if="scope.row.status!='used'" type="success" size="small" @click="tip(scope.row,'used')" icon="el-icon-check">启用</el-button>
     </template>
     <template slot-scope="scope" slot="status">
        <el-tag  :type="scope.row.status | statusFilter">{{scope.row.status}}</el-tag>
     </template>
     </avue-crud>
 </div>
-    
+ 
 </template>
 
 <script>
@@ -28,8 +27,8 @@ export default {
   filters: {
     statusFilter(status) {
       const statusMap = {
-        published: "success",
-        drft: "info"
+        used: "success",
+        ban: "danger"
       };
       return statusMap[status];
     }
@@ -72,7 +71,7 @@ export default {
   },
     fetchData() {
       this.$http
-        .get("course", {
+        .get("permission", {
           params: {
             query: this.query
           }
@@ -83,7 +82,7 @@ export default {
         });
     },
     fetchOption() {
-      this.$http.get("course/option").then(res => {
+      this.$http.get("permission/option").then(res => {
        this.option =res.data.option
       });
     },
@@ -105,7 +104,7 @@ export default {
       this.$message.success(date);
     },
     rowSave(row, done, loading) {
-      this.$http.post("course", row);
+      this.$http.post("permission", row);
       this.fetchData();
       done();
     },
@@ -115,7 +114,7 @@ export default {
       delete data.$Imp;
       delete data.$type;
       delete data.$status;
-      this.$http.put("course/" + row._id, data);
+      this.$http.put("permission/" + row._id, data);
       this.fetchData();
       done();
     },
@@ -125,7 +124,7 @@ export default {
       delete data.$Imp;
       delete data.$type;
       delete data.$status;
-      this.$http.delete("course/" + row._id, data);
+      this.$http.delete("permission/" + row._id, data);
       this.fetchData();
     },
 
@@ -137,7 +136,7 @@ export default {
       delete data.$Imp;
       delete data.$type;
       delete data.$status;
-      this.$http.put("course/" + row._id, data);
+      this.$http.put("permission/" + row._id, data);
       this.$message.success("success");
     }
   },
@@ -149,7 +148,7 @@ export default {
 </script>
 
 <style>
-.filecontainer {
-  margin: 20px 20px 20px 20px;
+.file{
+    margin: 20px 20px 20px 20px;
 }
 </style>

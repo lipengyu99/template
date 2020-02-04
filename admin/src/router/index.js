@@ -77,17 +77,28 @@ export const constantRoutes = [{
           icon: 'table'
 
         }
-      },
-      {
-        path: 'list',
-        component: () =>
-          import ('@/views/course/list'),
-        meta: {
-          title: '课程列表',
-          icon: 'table'
-        }
       }
+    ]
+  },
+  {
+    path: '/permission',
+    component: Layout,
+    redirect: '/permission',
+    name: 'permission',
+    meta: {
+      title: '权限',
+      icon: 'form'
+    },
+    children: [{
+      path: 'role',
+      component: () =>
+        import('@/views/permission/role'),
+      meta: {
+        title: '角色权限',
+        icon: 'form'
 
+      }
+    }
     ]
   },
 

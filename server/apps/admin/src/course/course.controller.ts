@@ -14,46 +14,84 @@ export class CourseController {
    @Get('option')
    option():any{
     return{
-        columns: {
-            item: [
-                {
-                   
-                    id: "1",
-                    label: "ID",
-                    width: "210px",
-                    sortable: true,
-                    prop: "_id"
-                },
-                {
-                    id: "2",
-                    label: "创建时间",
-                    sortable: true,
-                    width: "200px",
-                    prop: "createdAt"
-                },
-                {
-                    id: "3",
-                    label: "标题",
-                    sortable: false,
-                    width: "150px",
-                    prop: "title"
-                },
-                {
-                    id: "4",
-                    label: "重要性",
-                    sortable: true,
-                    width: "150px",
-                    prop: "Imp"
-                },
-                {
-                    id: "5",
-                   
-                    label: "类型",
-                    sortable: true,
-                    width: "150px",
-                    prop: "type"
-                },
+        option: {
+            index: true,
+            indexLabel: "序号",
+            title: "课程管理",
+            menuType: "icon",
+            page: false,
+            align: "center",
 
+            excelBtn: true,
+            menuAlign: "center",
+            column: [
+                {
+                    label: "标题",
+                    prop: "title",
+                    search: true,
+                    regex: true,
+                    rules: [{
+                        required: true,
+                        message: "请输入标题",
+                        trigger: "blur"
+                    }],
+                },
+                {
+                    label: "重要性",
+                    prop: "Imp",
+                    type: "select",
+                    search: true,
+                    sortable: true,
+                    dicData: [
+                        { value: 1, label: "1" },
+                        { value: 2, label: "2" },
+                        { value: 3, label: "3" }
+                    ]
+                },
+                {
+                    label: "类型",
+                    prop: "type",
+                    type: "select",
+                    search: true,
+                    rules: [{
+                        required: true,
+                        message: "请输入类型",
+                        trigger: "blur"
+                    }],
+                    dicData: [
+                        { value: "CN", label: "China" },
+                        { value: "US", label: "USA" },
+                        { value: "JP", label: "Japan" },
+                        { value: "EU", label: "Eurozone" }
+                    ]
+                },
+                {
+                    label: "日期",
+                    prop: "createdAt",
+                    type: "date",
+                    sortable: true,
+
+                    format: "yyyy-MM-dd hh:mm:ss",
+                    //valueFormat: "yyyy-MM-dd hh:mm:ss",
+                    addDisabled: true,
+                    addDisplay: false,
+
+                },
+                {
+                    label: "状态",
+                    prop: "status",
+                    slot: true,
+                    type: "select",
+                    dicData: [
+                        { value: "published", label: "发布成功" },
+                        { value: "drft", label: "草稿" }
+                    ],
+                    rules: [{
+                        required: true,
+                        message: "请输入状态",
+                        trigger: "blur"
+                    }],
+                }
             ]
         }
     }
