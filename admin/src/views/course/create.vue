@@ -10,7 +10,6 @@
     @row-update="rowUpdate" 
     @row-del="rowDel" 
     @search-change="searchChange">
-    
     <template slot-scope="scope" slot="menu">
         <el-button v-if="scope.row.status!='drft'" type="info" size="small" @click="tip(scope.row,'drft')" icon="el-icon-close">drft</el-button>
         <el-button v-if="scope.row.status!='published'" type="success" size="small" @click="tip(scope.row,'published')" icon="el-icon-check">publish</el-button>
