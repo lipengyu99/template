@@ -28,10 +28,12 @@ export default {
   components: { SidebarItem, Logo },
   computed: {
     ...mapGetters([
-      'sidebar'
+      'sidebar',
+      'permission_routes'
     ]),
     routes() {
-      return this.$router.options.routes
+      //return this.$router.options.routes
+      return this.$store.getters.permission_routes
     },
     activeMenu() {
       const route = this.$route
@@ -51,6 +53,9 @@ export default {
     isCollapse() {
       return !this.sidebar.opened
     }
-  }
+  },
+  created() {
+    console.log(this.$store)
+  },
 }
 </script>
