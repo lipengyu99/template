@@ -21,7 +21,7 @@ export class CourseController {
             menuType: "icon",
             page: false,
             align: "center",
-
+            searchShow:false,
             excelBtn: true,
             menuAlign: "center",
             column: [
@@ -70,7 +70,7 @@ export class CourseController {
                     prop: "createdAt",
                     type: "date",
                     sortable: true,
-
+                    editDisplay:false,
                     format: "yyyy-MM-dd hh:mm:ss",
                     //valueFormat: "yyyy-MM-dd hh:mm:ss",
                     addDisabled: true,

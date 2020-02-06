@@ -170,7 +170,7 @@ export default {
       },
     getList() {
       this.listLoading = true;
-      const res = this.$http.get("course",{params:this.listQuery}).then(response => {
+      this.$http.get("course",{params:this.listQuery}).then(response => {
         this.list = response.data.data;
         this.total = response.data.total;
         setTimeout(() => {
@@ -193,7 +193,7 @@ export default {
             type:'success',
         })
         row.status = status
-        window.console.log(row)
+        
         this.$http.put('course/'+row._id,row)
     },
 

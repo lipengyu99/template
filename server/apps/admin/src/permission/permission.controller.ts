@@ -23,7 +23,7 @@ export class PermissionController {
                 menuType: "icon",
                 page: false,
                 align: "center",
-               
+                searchShow: false,
                 menuAlign: "center",
                 column: [
                     {
@@ -88,7 +88,8 @@ export class PermissionController {
                         prop: "createdAt",
                         type: "date",
                         sortable: true,
-
+                        editDisabled:true,
+                        editDisplay:false,
                         format: "yyyy-MM-dd hh:mm:ss",
                         //valueFormat: "yyyy-MM-dd hh:mm:ss",
                         addDisabled: true,

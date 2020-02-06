@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { fetchList,fetchOptions } from "@/api/course";
 export default {
   filters: {
     statusFilter(status) {
@@ -44,8 +45,7 @@ export default {
       query: {
         page: 1
       },
-      option: {
-      }
+      option: {}
     };
   },
   methods: {
@@ -59,33 +59,26 @@ export default {
       this.fetchData();
       this.query.page = this.page.currentPage;
       this.query.limit = this.page.pageSize;
-      
     },
-     sizeChange(val) {
-    this.page.currentPage = 1;
-    this.query.page = this.page.currentPage;
-    this.page.pageSize = val;
-    this.query.limit = this.page.pageSize;
-    this.fetchData();
-   
-  },
+    sizeChange(val) {
+      this.page.currentPage = 1;
+      this.query.page = this.page.currentPage;
+      this.page.pageSize = val;
+      this.query.limit = this.page.pageSize;
+      this.fetchData();
+    },
     fetchData() {
-      this.$http
-        .get("course", {
-          params: {
-            query: this.query
-          }
-        })
-        .then(response => {
-          this.data = response.data.data;
-          this.page.total=response.data.total
-        });
+      fetchList(this.query).then(response=>{
+        this.data = response.data
+        this.page.total = response.total
+      })
     },
     fetchOption() {
-      this.$http.get("course/option").then(res => {
-       this.option =res.data.option
-      });
+      fetchOptions().then(res=>{
+      this.option = res.option
+      })
     },
+
     searchChange(params, done) {
       done();
       if (params.title) {
@@ -99,15 +92,14 @@ export default {
         this.$message.info(JSON.stringify(params));
       }
     },
-    dateChange(date) {
-      // window.console.log(date);
-      this.$message.success(date);
-    },
+    
     rowSave(row, done, loading) {
       this.$http.post("course", row);
       this.fetchData();
       done();
     },
+  
+    
     rowUpdate(row, index, done, loading) {
       const data = JSON.parse(JSON.stringify(row));
       delete data.$index;
