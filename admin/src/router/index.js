@@ -87,9 +87,9 @@ export const constantRoutes = [{
     hidden: true
   }
 ]
-// asyncRotues
+// asyncRoutes
 // 这个路由需要权限
-export const asyncRotues = [
+export const asyncRoutes = [
   {
     path:'/permission',
     component:Layout,
@@ -97,8 +97,8 @@ export const asyncRotues = [
     name:'Permission',
     meta:{
       title:'Permission',
-      icon:'lock',
-      roles:['admin','editor']
+      icon:'form',
+      roles: ['admin', 'editor']
     },
     children: [{
       path: 'role',
@@ -106,7 +106,8 @@ export const asyncRotues = [
         import('@/views/permission/role'),
       meta: {
         title: '角色权限',
-        icon: 'form'
+        icon: 'form',
+        roles: ['admin']
       }
     }
     ]
